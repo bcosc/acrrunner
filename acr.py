@@ -5,9 +5,9 @@ import argparse
 
 def parse_arguments(arglist):
   parser = argparse.ArgumentParser()
-  parser.add_argument('--workflow', '-W', metavar='CWLDOCUMENT',
+  parser.add_argument('workflow',
                       help="Input .cwl Workflow or CommandLineTool file")
-  parser.add_argument('--yaml', '-Y', metavar='YAMLINPUT',
+  parser.add_argument('yaml',
                       help="Input .yml/.json document")
   parser.add_argument('--dry-run', '-n', action='store_true',
                       help="Don't create Arvados objects, log what would happen")

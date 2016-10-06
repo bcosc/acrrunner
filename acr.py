@@ -12,7 +12,7 @@ def parse_arguments(arglist):
   parser.add_argument('--dry-run', '-n', action='store_true',
                       help="Don't create Arvados objects, log what would happen")
   parser.add_argument('--project_uuid', default='e51c5-j7d0g-2atyp0y6yoanxl6', 
-                      help="Don't create Arvados objects, log what would happen")
+                      help="Project UUID to store pipeline instance")
   args = parser.parse_args(arglist)
   return args
 

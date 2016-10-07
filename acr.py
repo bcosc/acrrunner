@@ -35,7 +35,6 @@ def main(arglist):
         if 'd1hrv' in line:
           instance_uuid = line.split(' ')[-1]
   arvados.api('v1').pipeline_instances().update(uuid=instance_uuid.strip(), body={'name' : args.yaml}).execute()
-  
 
 if __name__ == '__main__':
   sys.exit(main(sys.argv[1:]))

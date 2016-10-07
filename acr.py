@@ -25,7 +25,6 @@ def main(arglist):
               '--project-uuid', args.project_uuid,
               '--output-name', args.yaml,
               args.workflow, args.yaml]
-  #return run_args
   with open('/tmp/acr.log','w') as acrlog:
     subprocess.check_call(run_args, stderr=acrlog)
 
@@ -35,7 +34,6 @@ def main(arglist):
       if not instance_uuid:
         if 'd1hrv' in line:
           instance_uuid = line.split(' ')[-1]      
-  time.sleep(5)
   arvados.api('v1').pipeline_instances().update(uuid=instance_uuid, body={'name' : args.yaml}).execute()
   
 

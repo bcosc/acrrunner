@@ -2,6 +2,9 @@
 
 import sys
 import argparse
+import subprocess
+import arvados
+import time
 
 def parse_arguments(arglist):
   parser = argparse.ArgumentParser()
@@ -19,9 +22,21 @@ def parse_arguments(arglist):
 def main(arglist):
   args = parse_arguments(arglist)
   run_args = ['arvados-cwl-runner', '--local', '--verbose', 
-              '--project_uuid', args.project_uuid,
+              '--project-uuid', args.project_uuid,
+              '--output-name', args.yaml,
               args.workflow, args.yaml]
-  return run_args
+  #return run_args
+  with open('/tmp/acr.log','w') as acrlog:
+    subprocess.check_call(run_args, stderr=acrlog)
+
+  with open('/tmp/acr.log','r') as acrlog:
+    instance_uuid = ''
+    for line in acrlog:
+      if not instance_uuid:
+        if 'd1hrv' in line:
+          instance_uuid = line.split(' ')[-1]      
+  time.sleep(5)
+  arvados.api('v1').pipeline_instances().update(uuid=instance_uuid, body={'name' : args.yaml}).execute()
   
 
 if __name__ == '__main__':

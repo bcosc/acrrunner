@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source ~/.bashrc
+arvswitch $2
+
 source ~/cs1/bin/activate
 if [ ! -d ~/crunchstat_summaries/$1 ]; then
   mkdir ~/crunchstat_summaries/$1

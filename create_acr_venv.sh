@@ -1,10 +1,12 @@
 #!/bin/bash
 
 DIR=$1
-WORKFLOW=$2
-YAML=$3
+CLUSTER=$2
+WORKFLOW=$3
+YAML=$4
 
-echo $DIR
+source /home/bcosc/.bashrc
+arvswitch $CLUSTER
 
 if [ ! -d $DIR ]; then
   virtualenv $DIR

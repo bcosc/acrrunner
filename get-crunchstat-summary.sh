@@ -2,9 +2,10 @@
 
 source ~/.bashrc
 UUID=$1
+echo $UUID
 CLUSTER=${UUID:0:5}
 arvswitch $CLUSTER
-
+echo $UUID
 source ~/cs1/bin/activate
 if [ ! -d ~/crunchstat_summaries/$UUID ]; then
   mkdir ~/crunchstat_summaries/$UUID

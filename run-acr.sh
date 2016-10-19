@@ -28,8 +28,5 @@ if [ ! -d $DIR ]; then
 fi
 
 source $DIR/bin/activate
-UUID=`acr.py $WORKFLOW $YAML`
-echo $UUID
-TRIM_UUID=${UUID% *}
-echo $TRIM_UUID
-get-crunchstat-summary.sh $TRIM_UUID $CLUSTER
+UUID=$(acr.py $WORKFLOW $YAML 2>&1)
+get-crunchstat-summary.sh $UUID

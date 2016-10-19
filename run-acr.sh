@@ -30,3 +30,4 @@ fi
 source $DIR/bin/activate
 UUID=$(acr.py $WORKFLOW $YAML 2>&1)
 get-crunchstat-summary.sh $UUID
+email-me.py

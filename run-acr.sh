@@ -30,7 +30,7 @@ fi
 
 source $DIR/bin/activate
 UUID=$(acr.py $WORKFLOW $YAML 2>&1)
-get-crunchstat-summary.sh $UUID
+CRUNCHSTATOUTPUT=$(get-crunchstat-summary.sh $UUID)
 COLLECTIONOUTPUT=$(pi-output-summary.py $UUID $KEEP_MOUNT)
 echo $COLLECTIONOUTPUT
-/usr/bin/python ../arv-email/email-me.py -a $COLLECTIONOUTPUT -d $UUID
+/usr/bin/python ../arv-email/email-me.py -a $COLLECTIONOUTPUT $CRUNCHSTATOUTPUT -d $UUID

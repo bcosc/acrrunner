@@ -22,10 +22,10 @@ def main(args):
   job_uuids = []
   job_dict = {}
   job_list = wf['items'][0]['components'].keys()
-  print job_list
   job_list.sort()
-  with open(wf_uuid+'-outputsizes.txt','w') as out:
-    out.write("job_name, file_name, filesize")
+  out_path = os.path.join('/home/bcosc/output-colls', wf_uuid+'-outputsizes.txt')
+  with open(out_path,'w') as out:
+    out.write("job_name, file_name, filesize\n")
     for job_name in job_list:
       job_dict[job_name] = []
       job_uuid = wf['items'][0]['components'][job_name]['job']['uuid']
@@ -36,6 +36,7 @@ def main(args):
         stat = os.stat(os.path.join(keep_mount, output_pdh, file))
         filesize = stat.st_size
         out.write("%s, %s, %s\n" % (job_name, file, sizeof_fmt(filesize)))
+  return out_path
 
 if __name__ == '__main__':
   print main(sys.argv[1:])

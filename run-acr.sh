@@ -6,6 +6,7 @@ DIR=$1
 CLUSTER=$2
 WORKFLOW=$3
 YAML=$4
+KEEP_MOUNT="/home/bcosc/keep/by_id/"
 
 if [ "$1" == "-h" ]; then
   echo "Usage: run-acr.sh directory_name cluster_uuid workflow_path yaml_path"
@@ -30,4 +31,6 @@ fi
 source $DIR/bin/activate
 UUID=$(acr.py $WORKFLOW $YAML 2>&1)
 get-crunchstat-summary.sh $UUID
-/usr/bin/python ../arv-email/email-me.py
+COLLECTIONOUTPUT=$(pi-output-summary.py $UUID $KEEP_MOUNT)
+echo $COLLECTIONOUTPUT
+/usr/bin/python ../arv-email/email-me.py -a $COLLECTIONOUTPUT -d $UUID
